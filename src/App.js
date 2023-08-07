@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react'
+import Navbar from "./component/Navbar"
+import Newshome from './component/Newshome';
+import LoadingBar from 'react-top-loading-bar'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+} from "react-router-dom";
+
+export default class App extends Component {
+
+   state ={progress : 0
+
+   }
+  setprogress = (value) =>{
+    this.setState({progress: value});
+  }
+
+  render() {
+ 
+    return (
+      <Router>
+        <Navbar/>
+        <LoadingBar
+        color='#f11946'
+        progress= {this.state.progress}
+        // this.setprogressress(10)
+       
+      />
+        <Routes>
+          <Route exact path="/science" element={ <Newshome setprogress ={ this.setprogress }   key ="science" category ="science"/>}/>
+            <Route exact  path="/business"   element={<Newshome setprogress ={ this.setprogress }   key ="business" category ="business"/>}/>
+            <Route exact  path="/entertainment" element={<Newshome setprogress ={ this.setprogress }  key ="entertainment"  category ="entertainment"/>} />
+      
+          <Route exact path="/" element={<Newshome setprogress ={ this.setprogress }  key ="general" category ="general"/>} />
+          <Route exact  path="/health" element={<Newshome setprogress ={ this.setprogress }  key ="health"  category ="health"/>} />
+          <Route exact  path="/sports" element={<Newshome setprogress ={ this.setprogress }  key ="sports" category ="sports"/>} />
+          <Route exact path="/technology" element={<Newshome setprogress ={ this.setprogress }  key ="technology" category ="technology"/>} />
+        </Routes>
+        </Router>
+    )
+  }
 }
 
-export default App;
