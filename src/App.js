@@ -10,6 +10,7 @@ import {
   Route,
 
 } from "react-router-dom";
+import Newsiteam1 from './component/Newsiteam1';
 
 export default class App extends Component {
 
@@ -23,14 +24,17 @@ export default class App extends Component {
   render() {
  
     return (
-      <Router>
+      <>
+        <div>
         <Navbar/>
         <LoadingBar
         color='#f11946'
         progress= {this.state.progress}
-        // this.setprogressress(10)
+        
        
       />
+      {/* <Newsiteam1/> */}
+         <div>
         <Routes>
           <Route exact path="/science" element={ <Newshome setprogress ={ this.setprogress }   key ="science" category ="science"/>}/>
             <Route exact  path="/business"   element={<Newshome setprogress ={ this.setprogress }   key ="business" category ="business"/>}/>
@@ -41,7 +45,9 @@ export default class App extends Component {
           <Route exact  path="/sports" element={<Newshome setprogress ={ this.setprogress }  key ="sports" category ="sports"/>} />
           <Route exact path="/technology" element={<Newshome setprogress ={ this.setprogress }  key ="technology" category ="technology"/>} />
         </Routes>
-        </Router>
+        </div>
+        </div>
+        </>
     )
   }
 }

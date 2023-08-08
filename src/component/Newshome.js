@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Newsiteam from "./Newsiteam";
 import Loading from "./Loading";
+import Newsiteam1 from "./Newsiteam1";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
@@ -48,7 +49,7 @@ export class Newshome extends Component {
     this.setState({ articles: parsedata.articles, page: this.state.page + 1 });
   };
 
-  async componentDidMount() {
+  async componentDidMount(){
     this.props.setprogress(10);
     this.setState({ loading: true });
     this.props.setprogress(30);
@@ -86,12 +87,11 @@ export class Newshome extends Component {
   render() {
   
     return (
-      <div className="container">
-        <h1 className="text-center my-3">TOP {this.makecapiltal(this.props.category)} HEADLINES - TODAY'S NEWS</h1>
-        {this.state.loading && <h4 ><Loading /></h4>}
-
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
+      <>
+         <div className="container" style = {{marginTop:"50px"}}>
+         <InfiniteScroll
+        
+        dataLength={this.state.articles.length?this.state.articles.length:1}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length  !== this.state.totalResults}
           loader={
@@ -100,11 +100,16 @@ export class Newshome extends Component {
             </h4>
           }
         >
+        <h1 className="text-center my-2">TOP {this.makecapiltal(this.props.category)} HEADLINES - TODAY'S NEWS</h1>
+     
+        {this.state.loading && <h4 ><Loading /></h4>}
+
+       
           <div className="row mx-3">
             {this.state.articles.map((data) => {
               return (
                 <div key={data.url} className="col-md-4 my-3">
-                  <Newsiteam
+                  <Newsiteam1
                     tittle={data.title}
                     description={data.description}
                     imageUrl={data.urlToImage}
@@ -136,6 +141,7 @@ export class Newshome extends Component {
           </button>
         </div> */}
       </div>
+      </>
     );
   }
 }
